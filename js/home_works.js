@@ -6,8 +6,8 @@ const gmailResult = document.getElementById("gmail_result");
 // строго gmail.com
 const gmailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/;
 
-gmailButton.addEventListener("click", (e) => {
-    e.preventDefault(); // на всякий случай чтобы сайи не перезагружался
+gmailButton.onclick = (e) => {
+    e.preventDefault(); // на всякий случай чтобы сайт не перезагружался
 
     const value = gmailInput.value.trim();
 
@@ -28,51 +28,87 @@ gmailButton.addEventListener("click", (e) => {
         gmailResult.textContent = "❌ Невалидный Gmail";
         gmailResult.style.color = "red";
     }
-});
+};
 
 
-// ----- 2 задание) Moving block using recursion -----
+// ----- Moving block using recursion v2.0 -----
 const parentBlock = document.querySelector(".parent_block");
 const childBlock = document.querySelector(".child_block");
 
 // старт позиция
-let position = 0;
+let positionX = 0;
+let positionY = 0;
 // шаг (скорость в пикселях)
 const step = 2;
 // фдаг чтобы отслеживать идет ли анимация
 let isMoving = false;
 
 
-function moveRightRecursive() {
+function moveRectangleRecursive() {
     if (!isMoving) isMoving = true;
 
     // ширина родителя и ребенка
     const parentWidth = parentBlock.clientWidth;
-    const childWidth = childBlock.clientWidth;
+    const childWidth = childBlock.offsetWidth;
+
+    // высота родителя и ребенка
+    const parentHeight = parentBlock.clientHeight;
+    const childHeight = childBlock.offsetHeight;
 
     // максимальная позиция чтобы не вылетало за рамки
-    const maxPosition = parentWidth - childWidth;
+    const maxWidth = parentWidth - childWidth;
+    const maxHeight = parentHeight - childHeight;
 
-    if (position >= maxPosition) {
-        // остановка
-        childBlock.style.left = `${maxPosition}px`;
-        isMoving = false;
-        return;
+    // движение влево
+    if (positionX < maxWidth && positionY === 0) {
+        positionX += step;
+        childBlock.style.left = `${positionX}px`;
+    // движение вправо
+    } else if (positionX >= maxWidth && positionY < maxHeight) {
+        positionY += step;
+        childBlock.style.top = `${positionY}px`;
+
+    } else if (positionY >= maxHeight && positionX > 0) {
+        positionX -= step;
+        childBlock.style.left = `${positionX}px`;
+
+    } else if (positionX === 0 && positionY > 0) {
+        positionY -= step;
+        childBlock.style.top = `${positionY}px`;
     }
 
-    position += step;
-    childBlock.style.left = `${position}px`;
-
-    requestAnimationFrame(moveRightRecursive);
+    requestAnimationFrame(moveRectangleRecursive);
 }
 
-// добавил запуск движения по клику
-parentBlock.addEventListener("click", () => {
-    if (isMoving) return;
-    position = 0;
-    childBlock.style.left = "0px";
+moveRectangleRecursive();
 
-    moveRightRecursive();
-});
+// ----- Homework 2 -----
+// Задание 2)
+const seconds = document.querySelector("#seconds");
+const startBtn = document.querySelector("#start");
+const stopBtn = document.querySelector("#stop");
+const resetBtn = document.querySelector("#reset");
 
-moveRightRecursive();
+let counter = 0;
+let interval = null;
+
+startBtn.onclick = () => {
+    if (interval !== null) return;
+
+    interval = setInterval(() => {
+        counter++
+        seconds.innerText = counter
+    }, 1000);
+};
+
+stopBtn.onclick = () => {
+    clearInterval(interval);
+    interval = null;
+};
+
+resetBtn.onclick = () => {
+    clearInterval(interval);
+    interval = null;
+    counter = 0;
+    seconds.innerText = counter;
+};
