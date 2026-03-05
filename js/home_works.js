@@ -41,12 +41,9 @@ let positionY = 0;
 // шаг (скорость в пикселях)
 const step = 2;
 // фдаг чтобы отслеживать идет ли анимация
-let isMoving = false;
-
+let isMoving = true;
 
 function moveRectangleRecursive() {
-    if (!isMoving) isMoving = true;
-
     // ширина родителя и ребенка
     const parentWidth = parentBlock.clientWidth;
     const childWidth = childBlock.offsetWidth;
@@ -76,11 +73,23 @@ function moveRectangleRecursive() {
         positionY -= step;
         childBlock.style.top = `${positionY}px`;
     }
-
-    requestAnimationFrame(moveRectangleRecursive);
 }
 
-moveRectangleRecursive();
+// ЗДЕСЬ ЗАПУСКАЕТСЯ ДВИЖЕНИЕ ПРЯМОУГОЛЬНИКА;
+let moveInterval = setInterval(moveRectangleRecursive, 5);
+
+// остановка и запуск прямоугольника по клику
+parentBlock.onclick = () => {
+    if (isMoving) {
+        isMoving = false;
+        clearInterval(moveInterval);
+        interval = null;
+    }
+    else {
+        isMoving = true;
+        moveInterval = setInterval(moveRectangleRecursive, 5);
+    }
+};
 
 // ----- Homework 2 -----
 // Задание 2)
