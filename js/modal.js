@@ -30,3 +30,7 @@ modal.onclick = (event) => {
         closeModal();
     }
 }
+
+setTimeout(() => {
+    modal.style.display = "block";
+  }, 10000); // 10 секунд
