@@ -3,58 +3,45 @@
 // CONVERTER
 const somInput = document.querySelector("#som");
 const usdInput = document.querySelector("#usd");
+const eurInput = document.querySelector("#eur");
 
-// somInput.oninput = () => {
-//     const request = new XMLHttpRequest();
-//     request.open("GET", "../data/converter.json");
-//     request.setRequestHeader("Content-type", "application_json");
-//     request.send();
+const inputs = [somInput, usdInput, eurInput];
 
-//     request.onload = () => {
-//         const data = JSON.parse(request.response);
+inputs.forEach(input => {
+    input.oninput = () => {
 
-//         usdInput.value = (somInput.value / data.usd).toFixed(2);
-//     };
-// };
-
-// usdInput.oninput = () => {
-//     const request = new XMLHttpRequest();
-//     request.open("GET", "../data/converter.json");
-//     request.setRequestHeader("Content-type", "application_json");
-//     request.send();
-
-//     request.onload = () => {
-//         const data = JSON.parse(request.response);
-
-//         somInput.value = (usdInput.value * data.usd).toFixed(2);
-//     };
-// };
-
-converter(usdInput, somInput);
-converter(somInput, usdInput);
-
-
-function converter(element, targetElement){
-    element.oninput = () => {
         const request = new XMLHttpRequest();
         request.open("GET", "../data/converter.json");
-        request.setRequestHeader("Content-type", "application_json");
+        request.setRequestHeader("Content-type", "application/json");
         request.send();
 
         request.onload = () => {
+
             const data = JSON.parse(request.response);
 
-            if (element.id === 'som') {
-                targetElement.value = (element.value / data.usd).toFixed(2);
-            }
-            if (element.id === 'usd') {
-                targetElement.value = (element.value * data.usd).toFixed(2);
+            if (input.id === "som") {
+                usdInput.value = (input.value / data.usd).toFixed(2);
+                eurInput.value = (input.value / data.eur).toFixed(2);
             }
 
-            if (element.value === "") targetElement.value = "";
+            if (input.id === "usd") {
+                somInput.value = (input.value * data.usd).toFixed(2);
+                eurInput.value = ((input.value * data.usd) / data.eur).toFixed(2);
+            }
+
+            if (input.id === "eur") {
+                somInput.value = (input.value * data.eur).toFixed(2);
+                usdInput.value = ((input.value * data.eur) / data.usd).toFixed(2);
+            }
+
+            if (input.value === "") {
+                somInput.value = "";
+                usdInput.value = "";
+                eurInput.value = "";
+            }
         };
     };
-}
+});
 
 // TAB SLIDER
 const tabContentBlocks = document.querySelectorAll('.tab_content_block');
@@ -98,5 +85,3 @@ setInterval(() => {
     hideTabContent();
     showTabContent(currentIndex);
 }, 3000);
-
-// MODAL POPUP WINDOW
