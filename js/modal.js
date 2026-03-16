@@ -15,6 +15,7 @@ function closeModal() {
 function handleScroll() {
     if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
         openModal();
+        window.removeEventListener('scroll', handleScroll);
         document.body.style.overflow = 'hidden';
     }
 }

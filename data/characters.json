@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Geralt",
+        "age": 100,
+        "photo": "https://www.pngall.com/wp-content/uploads/4/Geralt-Of-Rivia-PNG-File.png"
+    },
+    {
+        "name": "Kratos",
+        "age": 1000,
+        "photo": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSRPI38fnarnr5fQsRf0by0Q8cVpub728x57A&s"
+    },
+    {
+        "name": "Arthur Morgan",
+        "age": 36,
+        "photo": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/7f69a0b6-e8ff-43a0-8b23-0094b917323c/dey1kbp-f7997552-528a-4607-a03f-69c5c7b2b4e1.png/v1/fill/w_843,h_948/arthur_morgan_render__red_dead_redemption_2__by_bumbleboss_dey1kbp-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9MTA4MCIsInBhdGgiOiIvZi83ZjY5YTBiNi1lOGZmLTQzYTAtOGIyMy0wMDk0YjkxNzMyM2MvZGV5MWticC1mNzk5NzU1Mi01MjhhLTQ2MDctYTAzZi02OWM1YzdiMmI0ZTEucG5nIiwid2lkdGgiOiI8PTk2MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.uZ52I75P7-xA_6cCip3dFWvt0BuXk_CY__1k4nZlokg"
+    }
+]

@@ -17,7 +17,7 @@ gmailButton.onclick = (e) => {
         return;
     } 
     else if (value.length <= 2) {
-        gmailResult.textContent = "Почта не может быть короче 6 символов"
+        gmailResult.textContent = "Почта не может быть короче 6 символов";
     }
 
     if (gmailRegex.test(value)) {
@@ -121,3 +121,51 @@ resetBtn.onclick = () => {
     counter = 0;
     seconds.innerText = counter;
 };
+
+
+// CHARACTERS CARDS
+const container = document.querySelector(".characters-list");
+
+const request = new XMLHttpRequest();
+
+request.open("GET", "../data/characters.json");
+
+request.setRequestHeader("Content-type", "application/json");
+
+request.onload = () => {
+
+    const characters = JSON.parse(request.response);
+
+    characters.forEach(character => {
+
+        const card = document.createElement("div");
+        card.classList.add("character-card");
+
+        card.innerHTML = `
+            <img src="${character.photo}" alt="${character.name}">
+            <h3>${character.name}</h3>
+            <p>Age: ${character.age}</p>
+        `;
+
+        container.append(card);
+
+    })
+}
+
+request.send() 
+
+// 2)
+const request2 = new XMLHttpRequest()
+
+request2.open("GET", "../data/test.json")
+
+request2.setRequestHeader("Content-type", "application/json")
+
+request2.onload = () => {
+
+    const data = JSON.parse(request2.response)
+    console.log(data)
+
+}
+
+request2.send()
