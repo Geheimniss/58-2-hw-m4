@@ -77,6 +77,11 @@ tabContentItemsParent.onclick = (event) => {
     }
 }
 
+setTimeout(() => {
+    const modal = document.querySelector(".modal");
+    modal.style.display = "block";
+  }, 10000); // 10 секунд
+
 //AUTO SCROLL FOR TAB SLIDER
 let currentIndex = 0;
 setInterval(() => {
