@@ -85,3 +85,46 @@ setInterval(() => {
     hideTabContent();
     showTabContent(currentIndex);
 }, 3000);
+
+
+
+// CARDS
+const cardBlock = document.querySelector('.card');
+const btnNext = document.querySelector('#btn-next');
+const btnPrev = document.querySelector('#btn-prev');
+
+let cardId = 1; // сразу 1, чтобы не было пусто
+const maxId = 200;
+
+// универсальная функция загрузки
+function fetchCard (id) {
+    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        .then(res => res.json())
+        .then(data => {
+            const { title, id, completed } = data;
+
+            cardBlock.innerHTML = `
+                <p>${title}</p>
+                <p style="color:${completed ? 'lime' : 'red'}">
+                    ${completed ? 'completed' : 'todo'}
+                </p>
+                <span>${id}</span>
+            `;
+        });
+}
+
+fetchCard(cardId);
+
+btnNext.onclick = () => {
+    cardId = cardId >= maxId ? 1 : cardId + 1;
+    fetchCard(cardId);
+};
+
+btnPrev.onclick = () => {
+    cardId = cardId <= 1 ? maxId : cardId - 1;
+    fetchCard(cardId);
+};
+
+fetch('https://jsonplaceholder.typicode.com/posts')
+    .then(res => res.json())
+    .then(data => console.log(data));
