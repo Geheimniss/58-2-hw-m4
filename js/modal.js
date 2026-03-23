@@ -1,36 +1,44 @@
-const modal = document.querySelector('.modal');
-const openModalBtn = document.querySelector('#btn-get');
-const closeModalBtn = document.querySelector('.modal_close');
+const modal = document.getElementById('diplomacyModal');
+const btnSummon = document.getElementById('btn-summon');
+const closeModal = document.getElementById('closeModal');
+const form = document.getElementById('diplomacyForm');
 
-function openModal() {
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-}
+const openModal = () => {
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden'; 
+};
 
-function closeModal() {
-    modal.style.display = 'none';
+const hideModal = () => {
+    modal.classList.remove('show');
     document.body.style.overflow = '';
-}
+};
 
-function handleScroll() {
-    if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+if (btnSummon) {
+    btnSummon.addEventListener('click', (e) => {
+        e.preventDefault(); 
         openModal();
-        window.removeEventListener('scroll', handleScroll);
-        document.body.style.overflow = 'hidden';
-    }
+    });
 }
 
-window.addEventListener("scroll", handleScroll);
-
-openModalBtn.onclick = openModal;
-closeModalBtn.onclick = closeModal;
-
-modal.onclick = (event) => {
-    if (event.target === modal) {
-        closeModal();
-    }
+if (closeModal) {
+    closeModal.addEventListener('click', hideModal);
 }
 
-setTimeout(() => {
-    modal.style.display = "block";
-  }, 10000); // 10 секунд
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+        hideModal();
+    }
+});
+
+document.addEventListener('keydown', (e) => {
+    if (e.code === 'Escape' && modal.classList.contains('show')) {
+        hideModal();
+    }
+});
+
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); 
+    alert('Гонец отправлен в Альтдорф! Ожидайте ответа (или нападения зеленокожих).');
+    form.reset(); 
+    hideModal();  
+});

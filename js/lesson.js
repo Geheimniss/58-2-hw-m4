@@ -1,5 +1,3 @@
-
-
 // CONVERTER
 const somInput = document.querySelector("#som");
 const usdInput = document.querySelector("#usd");
@@ -8,30 +6,24 @@ const eurInput = document.querySelector("#eur");
 const inputs = [somInput, usdInput, eurInput];
 
 inputs.forEach(input => {
-    input.oninput = () => {
-
-        const request = new XMLHttpRequest();
-        request.open("GET", "../data/converter.json");
-        request.setRequestHeader("Content-type", "application/json");
-        request.send();
-
-        request.onload = () => {
-
-            const data = JSON.parse(request.response);
+    input.oninput = async () => {
+        try {
+            const res = await fetch("../data/converter.json");
+            const data = await res.json();
 
             if (input.id === "som") {
-                usdInput.value = (input.value / data.usd).toFixed(2);
-                eurInput.value = (input.value / data.eur).toFixed(2);
+                usdInput.value = input.value ? (input.value / data.usd).toFixed(2) : '';
+                eurInput.value = input.value ? (input.value / data.eur).toFixed(2) : '';
             }
 
             if (input.id === "usd") {
-                somInput.value = (input.value * data.usd).toFixed(2);
-                eurInput.value = ((input.value * data.usd) / data.eur).toFixed(2);
+                somInput.value = input.value ? (input.value * data.usd).toFixed(2) : '';
+                eurInput.value = input.value ? ((input.value * data.usd) / data.eur).toFixed(2) : '';
             }
 
             if (input.id === "eur") {
-                somInput.value = (input.value * data.eur).toFixed(2);
-                usdInput.value = ((input.value * data.eur) / data.usd).toFixed(2);
+                somInput.value = input.value ? (input.value * data.eur).toFixed(2) : '';
+                usdInput.value = input.value ? ((input.value * data.eur) / data.usd).toFixed(2) : '';
             }
 
             if (input.value === "") {
@@ -39,7 +31,9 @@ inputs.forEach(input => {
                 usdInput.value = "";
                 eurInput.value = "";
             }
-        };
+        } catch (error) {
+            console.error("Ошибка загрузки курса валют:", error);
+        }
     };
 });
 
@@ -51,13 +45,13 @@ const tabContentItemsParent = document.querySelector('.tab_content_items');
 function hideTabContent() {
     tabContentBlocks.forEach(tabBlock => {
         tabBlock.style.display = 'none';
-    })
+    });
     tabContentItems.forEach(tabItem => {
         tabItem.classList.remove('tab_content_item_active');
-    })
-
+    });
 }
-function showTabContent(i=0) {
+
+function showTabContent(i = 0) {
     tabContentBlocks[i].style.display = 'block';
     tabContentItems[i].classList.add('tab_content_item_active');
 }
@@ -68,16 +62,15 @@ showTabContent();
 tabContentItemsParent.onclick = (event) => {
     if (event.target.classList.contains('tab_content_item')) {
         tabContentItems.forEach((tabItem, tabIndex) => {
-            if (event.target === tabItem)
-            {
+            if (event.target === tabItem) {
                 hideTabContent();
                 showTabContent(tabIndex);
             }
-        })
+        });
     }
-}
+};
 
-//AUTO SCROLL FOR TAB SLIDER
+// AUTO SCROLL FOR TAB SLIDER
 let currentIndex = 0;
 setInterval(() => {
     currentIndex++;
@@ -85,8 +78,6 @@ setInterval(() => {
     hideTabContent();
     showTabContent(currentIndex);
 }, 3000);
-
-
 
 // CARDS
 const cardBlock = document.querySelector('.card');
@@ -96,21 +87,24 @@ const btnPrev = document.querySelector('#btn-prev');
 let cardId = 1; // сразу 1, чтобы не было пусто
 const maxId = 200;
 
-// универсальная функция загрузки
-function fetchCard (id) {
-    fetch(`https://jsonplaceholder.typicode.com/todos/${id}`)
-        .then(res => res.json())
-        .then(data => {
-            const { title, id, completed } = data;
+// универсальная функция загрузки с async/await
+async function fetchCard(id) {
+    try {
+        const res = await fetch(`https://jsonplaceholder.typicode.com/todos/${id}`);
+        const data = await res.json();
+        const { title, id: dataId, completed } = data;
 
-            cardBlock.innerHTML = `
-                <p>${title}</p>
-                <p style="color:${completed ? 'lime' : 'red'}">
-                    ${completed ? 'completed' : 'todo'}
-                </p>
-                <span>${id}</span>
-            `;
-        });
+        cardBlock.innerHTML = `
+            <p>${title}</p>
+            <p style="color:${completed ? 'lime' : 'red'}">
+                ${completed ? 'completed' : 'todo'}
+            </p>
+            <span>${dataId}</span>
+        `;
+    } catch (error) {
+        console.error("Ошибка загрузки карточки:", error);
+        cardBlock.innerHTML = `<p>Ошибка загрузки карточки</p>`;
+    }
 }
 
 fetchCard(cardId);
@@ -125,6 +119,36 @@ btnPrev.onclick = () => {
     fetchCard(cardId);
 };
 
-fetch('https://jsonplaceholder.typicode.com/posts')
-    .then(res => res.json())
-    .then(data => console.log(data));
+async function fetchPosts() {
+    try {
+        const res = await fetch('https://jsonplaceholder.typicode.com/posts');
+        const data = await res.json();
+        console.log(data);
+    } catch (error) {
+        console.error("Ошибка загрузки постов:", error);
+    }
+}
+fetchPosts();
+
+// WEATHER BLOCK
+const searchInput = document.querySelector('#searchInput');
+const searchBtn = document.querySelector('#search');
+const city = document.querySelector('.city');
+const temp = document.querySelector('.temp');
+
+const API_KEY = '291aa3950880603684e43c6cc36aed88';
+const VERSION = '2.5';
+const BASE_API = `https://api.openweathermap.org/data/${VERSION}/weather`;
+
+searchBtn.onclick = async () => {
+    try {
+        const res = await fetch(`${BASE_API}?q=${searchInput.value}&units=metric&lang=ru&appid=${API_KEY}`);
+        const data = await res.json();
+        city.innerHTML = data.name;
+        temp.innerHTML = Math.round(data.main.temp);
+    } catch (error) {
+        console.error("Ошибка загрузки погоды:", error);
+        city.innerHTML = "Ошибка";
+        temp.innerHTML = "";
+    }
+};

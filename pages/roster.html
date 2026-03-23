@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Ростер Армии | The Empire</title>
+    <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<div class="wrapper">
+    <div class="header">
+        <div class="container">
+            <div class="inner_header">
+                <a href="../index.html">
+                    <div class="logotype">
+                        <h2>Warhammer<span> Roster</span></h2>
+                    </div>
+                </a>
+                <ul class="menu">
+                    <li class="menu_link"><a href="./roster.html">Войска</a></li>
+                    <li class="menu_link"><a href="./lessons.html">Гримуар Магии</a></li>
+                    <li class="menu_link"><a href="./home_works.html">Казармы</a></li>
+                    <li class="menu_link"><a href="./monster.html">Бестиарий</a></li>
+                </ul>
+                <button class="btn" id="btn-summon">Призвать Графов!</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="roster_page">
+        <div class="container">
+            <h2>Армия Рейкланда</h2>
+            <div class="characters-list"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <a href="#" target="_blank">
+                <div class="inner_footer">
+                    <h2>Сковано в кузнях Нульна</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="diplomacyModal">
+    <div class="modal_dialog">
+        <div class="modal_content">
+            <div class="modal_close" id="closeModal">&#10006;</div>
+            <div class="modal_title">Имперская Канцелярия</div>
+            <p class="modal_subtitle">Срочное донесение для Императора</p>
+            
+            <form action="#" id="diplomacyForm">
+                <input required placeholder="Ваш титул (Например: Курфюрст)" name="name" type="text" class="modal_input">
+                <input required placeholder="Куда отправить ответного ворона?" name="contact" type="text" class="modal_input">
+                <button class="btn" type="submit">Отправить гонца</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script src="../js/modal.js"></script>
+<script src="../js/chaos.js"></script>
+<script src="../js/roster.js"></script>
+</body>
+</html>

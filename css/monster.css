@@ -1,34 +1,44 @@
-body,
-html {
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    background: black;
+.monster_block {
+    padding: 140px 0 80px;
+    background: url('../img/texture.png') center/cover;
+    min-height: calc(100vh - 100px);
 }
 
-.header {
-    position: static !important;
+.lore_warning {
+    background: rgba(139, 0, 0, 0.2); 
+    border: 2px solid var(--empire-red);
+    padding: 20px;
+    border-radius: 6px;
+    text-align: center;
+    margin-bottom: 40px;
+    box-shadow: 0 0 20px rgba(139, 0, 0, 0.5);
 }
 
-.buymeacoffee {
-    text-decoration: none;
-    position: fixed;
-    right: 2rem;
-    bottom: 2rem;
-    background: #FFDD00;
-    width: 3.5rem;
-    height: 3.5rem;
-    border-radius: 50%;
-    transition: all 0.1s linear;
-    box-shadow: 0.2rem 0.2rem 0.5rem rgba(0, 0, 0, 0.2);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.lore_warning h3 {
+    color: var(--empire-red);
+    font-size: 28px;
+    margin-bottom: 10px;
 }
 
-.buymeacoffee:hover {
-    width: 4rem;
-    height: 4rem;
-    line-height: 4rem;
+.lore_warning p {
+    color: var(--parchment);
+    font-size: 18px;
+    font-style: italic;
+}
+
+.canvas_container {
+    width: 100%;
+    height: 500px;
+    border: 4px solid var(--empire-gold);
+    border-radius: 8px;
+    background: #050505;
+    position: relative;
+    overflow: hidden;
+    box-shadow: inset 0 0 50px rgba(0, 255, 0, 0.1), 0 10px 30px rgba(0,0,0,0.9);
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
 }

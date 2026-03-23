@@ -1,59 +1,76 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Monster</title>
-    <link rel="stylesheet" href="../css/style.css">
+    <title>Бестиарий | The Empire</title>
     <link rel="stylesheet" href="../css/core.css">
+    <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/monster.css">
 </head>
 <body>
+
 <div class="wrapper">
     <div class="header">
         <div class="container">
             <div class="inner_header">
                 <a href="../index.html">
                     <div class="logotype">
-                        <h2>Java<span>Script</span></h2>
+                        <h2>Warhammer<span> Roster</span></h2>
                     </div>
                 </a>
                 <ul class="menu">
-                    <li class="menu_link">
-                        <a href="../pages/home_works.html">Home Works</a>
-                    </li>
-                    <li class="menu_link">
-                        <a href="../pages/lessons.html">Lessons</a>
-                    </li>
-                    <li class="menu_link">
-                        <a href="https://t.me/NurDinBuy16" target="_blank">Send message</a>
-                    </li>
+                    <li class="menu_link"><a href="roster.html">Войска</a></li>
+                    <li class="menu_link"><a href="lessons.html">Гримуар Магии</a></li>
+                    <li class="menu_link"><a href="home_works.html">Казармы</a></li>
+                    <li class="menu_link"><a href="monster.html">Бестиарий</a></li>
                 </ul>
-                <button class="btn" id="btn-get">Click me!</button>
+                <a href="../index.html"><button class="btn" id="btn-summon">Призвать графов!</button></a>
             </div>
         </div>
     </div>
-</div>
-<canvas id="canvas"></canvas>
 
-<div class="modal">
+    <div class="monster_block">
+        <div class="container">
+            <div class="lore_warning">
+                <h3>Архивы Ордена Тамплиеров Зигмара</h3>
+                <p>Внимание! Наблюдение за чистой энергией Варпа может привести к мутациям и безумию. Водите пером (курсором) по пергаменту, чтобы отгонять скверну Хаоса.</p>
+            </div>
+            
+            <div class="canvas_container">
+                <canvas id="canvas"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <a href="#" target="_blank">
+                <div class="inner_footer">
+                    <h2>Сковано в кузнях Нульна</h2>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="diplomacyModal">
     <div class="modal_dialog">
         <div class="modal_content">
-            <form action="#">
-                <div class="modal_close">&times;</div>
-                <div class="modal_title">Мы свяжемся с вами как можно быстрее!</div>
-                <label>
-                    <input required placeholder="Ваше имя" name="name" type="text" class="modal_input">
-                </label>
-                <label>
-                    <input required placeholder="Ваш номер телефона" name="phone" class="modal_input">
-                </label>
-                <button class="btn btn_dark btn_min">Перезвонить мне</button>
+            <div class="modal_close" id="closeModal">&#10006;</div>
+            <div class="modal_title">Имперская Канцелярия</div>
+            <p class="modal_subtitle">Срочное донесение для Императора</p>
+            
+            <form action="#" id="diplomacyForm">
+                <input required placeholder="Ваш титул (Например: Курфюрст)" name="name" type="text" class="modal_input">
+                <input required placeholder="Куда отправить ответного ворона?" name="contact" type="text" class="modal_input">
+                <button class="btn" type="submit">Отправить гонца</button>
             </form>
         </div>
     </div>
 </div>
 
-</body>
-<script src="../js/monster.js"></script>
 <script src="../js/modal.js"></script>
+<script src="../js/chaos.js"></script>
+<script src="../js/monster.js"></script>
+</body>
 </html>

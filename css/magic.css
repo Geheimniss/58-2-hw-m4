@@ -1,0 +1,68 @@
+.magic_block {
+    padding: 140px 0 100px;
+    min-height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.magic_radar {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-bottom: 50px;
+}
+
+.magic_radar input {
+    width: 450px;
+    text-align: center;
+}
+
+.magic_result {
+    background: rgba(15, 15, 15, 0.9);
+    border: 2px solid var(--empire-gold);
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+    transition: all 0.5s ease;
+    box-shadow: 0 0 20px rgba(0,0,0,0.8);
+    opacity: 1;
+}
+
+.magic_result.hidden {
+    opacity: 0;
+    transform: scale(0.9);
+    pointer-events: none;
+}
+
+.wind_rune {
+    font-size: 80px;
+    margin: 20px 0;
+    text-shadow: 0 0 30px currentColor;
+    /* Легкая анимация пульсации магии */
+    animation: pulse 2s infinite alternate;
+}
+
+@keyframes pulse {
+    from { text-shadow: 0 0 10px currentColor; }
+    to { text-shadow: 0 0 40px currentColor, 0 0 20px #fff; }
+}
+
+.wind_lore {
+    font-size: 20px;
+    color: var(--parchment);
+    font-style: italic;
+    line-height: 1.6;
+}
+
+/* МАГИЧЕСКИЕ СВЕЧЕНИЯ ДЛЯ ВЕТРОВ */
+.wind-aqshy { color: #ff4500; border-color: #ff4500; box-shadow: inset 0 0 30px rgba(255, 69, 0, 0.2), 0 0 30px rgba(255, 69, 0, 0.4); }
+.wind-shyish { color: #8a2be2; border-color: #8a2be2; box-shadow: inset 0 0 30px rgba(138, 43, 226, 0.2), 0 0 30px rgba(138, 43, 226, 0.4); }
+.wind-azyr { color: #1e90ff; border-color: #1e90ff; box-shadow: inset 0 0 30px rgba(30, 144, 255, 0.2), 0 0 30px rgba(30, 144, 255, 0.4); }
+.wind-ghyran { color: #32cd32; border-color: #32cd32; box-shadow: inset 0 0 30px rgba(50, 205, 50, 0.2), 0 0 30px rgba(50, 205, 50, 0.4); }
+.wind-chamon { color: #ffd700; border-color: #ffd700; box-shadow: inset 0 0 30px rgba(255, 215, 0, 0.2), 0 0 30px rgba(255, 215, 0, 0.4); }
+.wind-ulgu { color: #808080; border-color: #808080; box-shadow: inset 0 0 30px rgba(128, 128, 128, 0.2), 0 0 30px rgba(128, 128, 128, 0.4); }
+.wind-hysh { color: #ffffff; border-color: #ffffff; box-shadow: inset 0 0 30px rgba(255, 255, 255, 0.2), 0 0 30px rgba(255, 255, 255, 0.4); }
+.wind-ghur { color: #d2691e; border-color: #d2691e; box-shadow: inset 0 0 30px rgba(210, 105, 30, 0.2), 0 0 30px rgba(210, 105, 30, 0.4); }
